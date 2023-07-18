@@ -1,0 +1,10 @@
+Flask==2.1.0
+Werkzeug==2.1.0
+flask_mysqldb
+pyjwt
+bcrypt
+colorama
+Jinja2==3.1.2
+flask_expects_json
+selenium
+mysqlclient==2.1.1

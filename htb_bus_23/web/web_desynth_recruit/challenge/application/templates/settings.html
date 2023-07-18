@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    
+    <title>Desynth Recruit+ | Profile Settings</title>
+
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/global.js"></script>
+    <script type="text/javascript" src="/static/js/settings.js" async="true"></script>
+    <link rel="icon" href="/static/images/logo.png" />
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+    <link href='https://fonts.googleapis.com/css?family=Paytone+One&display=swap' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+</head>
+
+<body>
+    <div class="parent-container">
+        <div class="sidebar">
+            <img class="main-logo mb-2" src="/static/images/logo.png" />
+            <p class="title-p">Desynth Recruit+<br /></p>
+            <ul class="nav-bar">
+                <!-- <li><a href="#" class="is-primary nav-li">Profile</a></li> -->
+                {% if user.username == 'admin' %}
+                <li><a href="/ipc_documents" class="is-primary nav-li">IPC Submissions</a></li>
+                {% endif %}
+                <li><a href="/settings" class="is-primary nav-li">Settings</a></li>
+                <li><a href="/logout" class="is-primary nav-li">Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-area">
+            {% if user.is_public == '1' %}
+            <p class="alert alert-success alert-fix">Your profile is now public, <a href="/profile/{{user.id}}"
+                    class="profile-link" target="_blank">visit profile</a></a></p>
+            {% else %}
+            <p class="alert alert-success alert-fix">Complete setting up your profile to make it public</p>
+            {% endif %}
+            {% if user.ipc_submitted == '0' %}
+            <p class="alert alert-warning alert-fix">Please submit your <b>Intergalactic Pilot Certification (IPC)</b>
+                image
+                to initiate the recruiting process. Our moderators will verify your document.</p>
+            {% endif %}
+            <p class="segment-header mt-2">Your information</p>
+            <div class="basic-form">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="full_name">Full Name</label>
+                        <input type="text" id="full_name" class="form-control" value="{{ user.full_name }}" />
+                    </div>
+                    <div class="form-group col-md-6 mt-sm-fix">
+                        <label for="issn">Intergalactic Social Security Number</label>
+                        <input type="text" id="issn" class="form-control" value="{{ user.issn }}" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-md-6">
+                        <label for="qualification">Qualification</label>
+                        <select id="qualification" class="form-select" value="{{ user.qualification }}">
+                            <option value="BPC">Bachelors Pilot Certification</option>
+                            <option value="HSPC">Higher Secondary Pilot Certification</option>
+                            <option value="SSPC">School Secondary Pilot Certification</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 mt-sm-fix">
+                        <label for="full_name">Industry Experience</label>
+                        <select id="iexp" class="form-select" value="{{ user.iexp }}">
+                            <option value="8">8+ years</option>
+                            <option value="4">4-7 years</option>
+                            <option value="3">1-3 years</option>
+                            <option value="0">0 years</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col">
+                        <label for="full_name">Bio (limited HTML supported)</label>
+                        <textarea type="text" id="bio" class="form-control">{{ user.bio }}</textarea>
+                    </div>
+                </div>
+                <p class="segment-header mt-2">Select the bots you have operated before</p>
+                <div class="row">
+                    <div class="form-group col w-100">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input type="hidden" id="bots" value="{{ user.bots }}">
+                                    <input class="form-check-input sBots" type="checkbox" value="DisBot">
+                                    <label class="form-check-label" for="DisBot">
+                                        <img src="/static/images/bots/jake-parker-discord.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="FBot">
+                                    <label class="form-check-label" for="FBot">
+                                        <img src="/static/images/bots/jake-parker-fb.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="GoBot">
+                                    <label class="form-check-label" for="GoBot">
+                                        <img src="/static/images/bots/jake-parker-googlesquare.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="InstaBot">
+                                    <label class="form-check-label" for="InstaBot">
+                                        <img src="/static/images/bots/jake-parker-insta.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="RedBot">
+                                    <label class="form-check-label" for="RedBot">
+                                        <img src="/static/images/bots/jake-parker-reddit.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="SpotBot">
+                                    <label class="form-check-label" for="SpotBot">
+                                        <img src="/static/images/bots/jake-parker-spotify.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="TicBot">
+                                    <label class="form-check-label" for="TicBot">
+                                        <img src="/static/images/bots/jake-parker-ticktock.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="TwiBot">
+                                    <label class="form-check-label" for="TwiBot">
+                                        <img src="/static/images/bots/jake-parker-twitter.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-check">
+                                    <input class="form-check-input sBots" type="checkbox" value="ViBot">
+                                    <label class="form-check-label" for="ViBot">
+                                        <img src="/static/images/bots/jake-parker-vine.png" width="85px">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="segment-header mt-2">SEO for profile</p>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="full_name">Meta Discription</label>
+                        <input type="text" id="meta_desc" class="form-control" value="{{ user.meta_desc }}" />
+                    </div>
+                    <div class="form-group col-md-6 mt-sm-fix">
+                        <label for="issn">Meta Keywords</label>
+                        <input type="text" id="meta_keywords" class="form-control" value="{{ user.meta_keywords }}" />
+                    </div>
+                </div>
+
+                <p class="segment-header mt-2">Intergalactic Pilot Certification (IPC)</p>
+                <div class="row">
+                    {% if user.ipc_submitted == '1' and user.ipc_verified == '1' %}
+                    <div class="col-md-6">
+                        <p class="alert alert-success alert-fix">You are verified.</p>
+                    </div>
+                    {% elif user.ipc_submitted == '1' and user.ipc_verified == '0' %}
+                    <div class="col-md-6">
+                        <p class="alert alert-warning alert-fix">Our moderators are reviewing your documents.</p>
+                    </div>
+                    {% else %}
+
+                    <div class="form-group col-md-6">
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="submit-btns mt-3 d-flex">
+                    <button type="button" id="save-btn" class="btn btn-primary w-25 m-3 ms-0 mt-0">Save</button>
+                    <p id="resp-msg" class="alert alert-fix alert-info w-75 m-3 ms-0 mt-0">Please wait...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

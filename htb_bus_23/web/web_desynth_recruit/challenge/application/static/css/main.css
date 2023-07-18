@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap');
+
+
+body {
+    background-color: #134E5E;
+}
+
+
+/*GLOBALS*/
+*{margin:0; padding:0; list-style:none;}
+a{text-decoration:none;	color:#666;}
+a:hover{color:#1bc1a3;}
+body, html{
+    background: #053133;
+    font-family: Neucha, Arial, sans serif, sans-serif;
+    color: #fff
+}
+
+ .nes-container.with-title > .title {
+     display: table;
+     padding: 0 .5rem;
+     margin: -1.8rem 0 1rem;
+     background-color: transparent !important;
+}
+
+ .nes-container.with-title > .title > span {
+     background-color: #ef7385;
+     padding: .2rem .5rem;
+}
+
+ .nes-container.with-title > .title > span:nth-last-child(1){
+     margin-left: -25px;
+}
+
+ .parent-container {
+     display: flex;
+     height: 100%;
+     width: 70%;
+     max-width: 1200px;
+     min-width: 680px;
+     justify-content: center;
+     margin: 0 auto;
+     padding: 0;
+}
+
+
+/* sidebar and menu */
+
+
+ .sidebar {
+     padding: 0.5rem;
+     margin: 2rem 0rem;
+     width: 300px;
+     text-align: center;
+     border-right: 2px solid #4f9c90;
+}
+
+ .main-area {
+     width: 100%;
+     padding: 0.5rem;
+     padding-left: 2rem;
+     margin: 2rem 0rem;
+}
+
+ .main-logo {
+     width: 150px;
+     height: 150px;
+     margin-right: -26px;
+}
+
+ .title-p {
+     margin-right: -30px !important;
+}
+
+ .title {
+     font-size: 1.5rem !important;
+}
+
+ .nav-bar {
+     list-style: none;
+     width: 100%;
+}
+
+ .nav-li {
+     width: 100%;
+}
+
+.nav-li {
+    display: block;
+    margin-top: 5px;
+}
+
+.nav-li.is-primary {
+     /*! background-color: #ffeaa7 !important; */
+     padding: 5px;
+     border: 2px solid #4f9c90;
+    color: #d8dfe8;
+}
+
+/* feed posts arrangement */
+
+
+ .post-arrangement {
+     display: flex;
+}
+
+ .vote-icons {
+     display: flex;
+     align-items: center;
+}
+
+ .vote-icons>p {
+     display: table;
+     margin-right: 10px;
+}
+
+ .vote-icons >p>span {
+     display:table-row;
+     color: #ef7385;
+     font-size: 1.5rem;
+     cursor: pointer;
+}
+
+ .vote-icons >p>span:hover {
+     position:relative;
+     margin:4px;
+     margin-bottom: 20px;
+     color:#4b5364;
+     background-color: #fcd770 !important;
+     border-color:  #fcd770 !important;
+     flex: 1;
+}
+
+ .nes-container.is-post {
+     position:relative;
+     margin:4px;
+     margin-bottom: 20px;
+     color:#000;
+     background-color: #f0d0b4 !important;
+     border-color:  #ef7385 !important;
+     flex: 1;
+}
+
+
+/* add submission box */
+
+ .postbox-area.is-dark {
+     background-color: transparent;
+     border-color: #ef7385;
+     color: black;
+}
+
+ .submit-btn {
+     width: 10rem;
+     padding: 0;
+     display: block;
+     margin-bottom: 30px !important;
+}
+
+.nes-btn {
+    background-color: #ffeaa7;
+    border-color: #ef7385;
+}
+
+.nes-btn::after {
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	bottom: -2px;
+	left: -2px;
+	content: "";
+	box-shadow: inset -2px -2px #ef7385;
+}
+
+.nes-btn:hover::after {
+ box-shadow:inset -2px -2px red
+}
+/* profile page */
+
+
+ .profile-area {
+     text-align: center;
+     background-color: transparent !important;
+     border: none !important;
+     border-top: 0.3rem solid #494d7e !important;
+    ;
+}
+
+ .profile-area>.title {
+     display:table;
+     padding:0 .5rem;
+     margin:-1.8rem 0 1rem;
+     font-size:1rem;
+     background-color:#494d7e !important;
+}
+
+ .profile-area>.title {
+     margin:-1.7rem auto 1rem !important;
+}
+
+ .profile-avatar {
+     margin-top: 2rem;
+     margin-bottom: 1.5rem;
+     min-width: 13rem;
+     min-height: 13rem;
+     border-radius: 7rem !important;
+     animation: border-flicker 2s linear infinite;
+}
+
+
+
+
+ #resp-msg {
+     margin-top: 1rem;
+     display: none;
+}
+
+
+ .history-feed {
+     border: none !important;
+     border-top: 0.3rem solid #ef7385 !important;
+     margin-top: 0rem;
+}
+
+ .history-feed>.title {
+     display:table;
+     padding:0 .5rem;
+     margin:-1.6rem 0 1rem;
+     font-size:1rem;
+     background-color:#ef7385 !important;
+}
+
+.alert-fix {
+    /*! height: 2rem; */
+    padding: 10px 20px;
+}
+
+@media only screen and (max-width: 780px) {
+    .mt-sm-fix {
+        margin-top: 20px;
+    }
+}
+
+.profile-link {
+    color: #fff;
+
+    font-weight: bold;
+}
